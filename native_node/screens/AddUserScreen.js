@@ -41,7 +41,10 @@ class AddUserScreen extends Component {
           });
         alert('Success Add');
         // call select all to update the table
+        this.props.navigation.navigate('UserScreen')
+
       }
+      
       catch (error) {
         console.log(error);
       }
@@ -67,8 +70,9 @@ class AddUserScreen extends Component {
           />
         </View>
       </ScrollView>
-    );
+    ); 
   }
+  
 }
 
 const styles = StyleSheet.create({
