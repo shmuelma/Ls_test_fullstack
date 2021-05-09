@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Alert, Button, StyleSheet, TextInput, ScrollView, ActivityIndicator, View } from 'react-native';
-const update_user = 'http://10.0.2.2:5001/sever-apinode/us-central1/app/api/update'
+const update_user = 'http://10.0.2.2:5001/sever-apinode/us-central1/app/api/update/'
 class UpdateUser extends Component {
 
   constructor() {
@@ -19,18 +19,39 @@ class UpdateUser extends Component {
     this.setState(state);
   }
 
-  async updateUser(item) {
+  componentDidMount() {
+    this.setState({ name: this.props.route.params.name })
+  }
+  async updateUser() {
+    let rjx = /[a-zA-Z]+$/
+    let isvalid = rjx.test(this.state.name)
+    if (!isvalid) {
+      alert('the name is not leagle!')
+    }
+    else{
     try {
-      
+
+
       const requestBody = {
-        item: item.item
+        item: this.state.name
       };
 
-      this.props.navigation.navigate('UserScreen');
-    }
-    catch (error) {
+      const updateResponse =
+        await fetch(update_user + this.props.route.params.id, {
+          method: 'PUT',
+          body: JSON.stringify(requestBody),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      alert('Success Update');
+      this.props.navigation.navigate('UserScreen')
+
+      // call select all to update the table
+    } catch (error) {
       alert(error);
     }
+  }
   }
 
   render() {
@@ -38,15 +59,11 @@ class UpdateUser extends Component {
     return (
       <ScrollView style={styles.container}>
         <View style={styles.inputGroup}>
-          <TextInput
-            placeholder={'Name'}
-            value={this.state.name}
-            onChangeText={(val) => this.inputValueUpdate(val, 'name')}
-          />
+
           <TextInput
             placeholder={'Update_Name'}
-            value={this.state.update_name}
-            onChangeText={(val) => this.inputValueUpdate(val, 'update_name')}
+            value={this.state.name}
+            onChangeText={(val) => this.inputValueUpdate(val, 'name')}
           />
         </View>
         <View>

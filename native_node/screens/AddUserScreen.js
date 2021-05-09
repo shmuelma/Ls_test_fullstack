@@ -21,7 +21,6 @@ class AddUserScreen extends Component {
   async saveItem() {
     let rjx = /[a-zA-Z]+$/
     let isvalid = rjx.test(this.state.name)
-    console.warn(isvalid)
     if (!isvalid) {
       alert('the name is not leagle!')
     }
@@ -46,7 +45,7 @@ class AddUserScreen extends Component {
       }
       
       catch (error) {
-        console.log(error);
+        alert(error);
       }
     }
   }

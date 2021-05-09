@@ -4,16 +4,17 @@ import React, { Component } from 'react';
 import { StyleSheet, ScrollView, Text, Button, View } from 'react-native';
 import { ListItem } from 'react-native-elements'
 const list_user = 'http://10.0.2.2:5001/sever-apinode/us-central1/app/api/read';
-const delete_user = 'http://10.0.2.2:5001/sever-apinode/us-central1/app/api/delete/'
+const delete_user = 'http://10.0.2.2:5001/sever-apinode/us-central1/app/api/delete/';
 
 class UserScreen extends Component {
   constructor() {
     super();
     this.state = {
       userArr: [],
-
+      
     };
   }
+
   async componentDidMount() {
     await this.selectAll()
 
@@ -51,11 +52,6 @@ class UserScreen extends Component {
             onPress={() => this.props.navigation.navigate('AddUserScreen')}
             color="#19AC52"
           />
-          <Button
-            title='Update User'
-            onPress={() => this.props.navigation.navigate('UpdateUser')}
-            color="#E37399"
-          />
         </View>
         {
 
@@ -66,17 +62,20 @@ class UserScreen extends Component {
                 chevron
                 bottomDivider
                 title={item.item}
+               
               >
 
                 <Text> {item.item} </Text>
-                <Button title="delete" onPress={() => this.deleteUser(item.id)}>
-
-                </Button>
+                <Button title="delete" onPress={() => this.deleteUser(item.id)}></Button>
+                <Button title="update" onPress={() => this.props.navigation.navigate('UpdateUser', {
+                    id: item.id,
+                    name:item.item
+                  })}></Button>
 
               </ListItem>
             );
           })
-        }
+         }
       </ScrollView>
     );
   }

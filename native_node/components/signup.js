@@ -1,5 +1,3 @@
-// components/signup.js
-
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
 import auth from '@react-native-firebase/auth';
@@ -41,7 +39,6 @@ export default class Signup extends Component {
   registerUser = () => {
     let rjx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     let isvalid = rjx.test(this.state.email)
-    console.warn(isvalid)
 
     if (!isvalid) {
       this.setState({ emailerror: "email syntax illegal" })

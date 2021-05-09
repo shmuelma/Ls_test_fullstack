@@ -39,7 +39,6 @@ export default class Login extends Component {
   userLogin = () => {
     let rjx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     let isvalid = rjx.test(this.state.email)
-    console.warn(isvalid)
 
     if (!isvalid) {
       this.setState({ emailerror: "email syntax illegal" })
